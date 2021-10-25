@@ -250,7 +250,8 @@ MonoBehaviour:
   - {fileID: 1441501212}
   - {fileID: 1154820167}
   - {fileID: 753240074}
-  _secondsBetweenSpawn: 2
+  _waitForSeconds: 2
+  _numberEnemies: 10
 --- !u!1 &286531361
 GameObject:
   m_ObjectHideFlags: 0

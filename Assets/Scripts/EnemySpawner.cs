@@ -6,27 +6,32 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _template;
     [SerializeField] private Transform[] _spawnPoints;
-    [SerializeField] private float _secondsBetweenSpawn;
+    [SerializeField] private float _waitForSeconds;
+    [SerializeField] private int _numberEnemies;
 
-    private float _runingTime = 0;
     private int _currentPoint = 0;
 
-    private void Update()
+    private void Start()
     {
-        _runingTime += Time.deltaTime;
+        StartCoroutine(Spawn());
+    }
 
-        if(_runingTime >= _secondsBetweenSpawn)
+    private IEnumerator Spawn()
+    {
+        var waitForSeconds = new WaitForSeconds(_waitForSeconds);
+
+        for (int i = 0; i < _numberEnemies; i++)
         {
-            _runingTime = 0;
-
             Instantiate(_template, _spawnPoints[_currentPoint]);
 
             _currentPoint++;
 
-            if(_currentPoint >= _spawnPoints.Length)
+            if (_currentPoint >= _spawnPoints.Length)
             {
                 _currentPoint = 0;
             }
+
+            yield return waitForSeconds;
         }
     }
 }
